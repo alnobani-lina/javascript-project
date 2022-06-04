@@ -59,16 +59,16 @@ let tie = "It is a tie"
 
 var i = 0;
 const play = () => {
-    let playerSelection = prompt("Pick a move");
-    const computerSelection = computerPlay()
-    console.log(playRound(playerSelection, computerSelection))
-    console.log("your score = " + userScore);
-    console.log("Computer's score = " + computerScore);
+    let playerSelection = prompt("Pick a move rock, paper or scissprs");
+    const computerSelection = computerPlay();
+    console.log(playRound(playerSelection, computerSelection));
+    console.log(`user score = ${userScore}`);
+    console.log(`computer score = ${computerScore}`);
     i++;
     if (i !== 5) {
         play();
     } else {
-        alert("Game Over=> User("+userScore+") vs Computer("+computerScore+")");
+        alert(`GAME OVER! user score = ${userScore} VS computer score = ${computerScore}`);
     }
 }
 
