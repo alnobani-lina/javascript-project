@@ -1,65 +1,75 @@
-var options = ["rock", "paper", "scissors"];
-var playerScore = 0;
-var computerScore = 0;
-
-var playerSelection = prompt("Do you choose rock, paper or scissors?").toLocaleLowerCase();
-if (playerSelection === "rock" || playerSelection === "paper" || playerSelection === "scissors")
-    console.log(`you chose ${playerSelection}`);
-else
-    console.log("Try again");
-
-
-const computerSelection = options[Math.floor(Math.random()*options.length)];
-console.log(`Computer chose ${computerSelection}`);
-
-function playRound(){
-    console.log(playerSelection + " " + computerSelection);
-    if(playerSelection === "rock" && computerSelection === "rock"){
-    console.log("It`s a tie!");
-    } else if(playerSelection === "scissors" && computerSelection === "scissors"){
-        console.log("It`s a tie!");
-    } else if (playerSelection === "paper" && computerSelection === "paper"){
-        console.log("It`s a tie!");
-    }else if (playerSelection === "rock" && computerSelection === "scissors"){
-        console.log("You win!");
-        playerScore++;
-    } else if (playerSelection === "scissors" && computerSelection === "paper"){
-        console.log("You win!");
-        playerScore++;
-    } else if (playerSelection === "paper" && computerSelection === "rock"){
-        console.log("You win!");
-        playerScore++;
-    } else if (playerSelection === "rock" && computerSelection === "paper"){
-        console.log("You lose!");
-        computerScore++;
-    } else if (playerSelection === "paper" && computerSelection === "sicssors"){
-        console.log("You lose!");
-        computerScore++;
+function computerPlay() {
+    let random = Math.random();
+    if (random <= 0.3333) {
+        return "paper";
+    } else if (random >= 0.6666) {
+        return "rock";
     } else {
-        console.log("You lose!");
-        computerScore++;
+        return "scissors";
     }
-        
-        console.log(`playes score is ${playerScore}`);
-        console.log(`computer score is ${computerScore}`);
-    }
-
-playRound();
-
-
-for (var i = 0; i < 5; i++){
-        
-        
-
-    if (i == 5) {
-        alert(`GAME OVER ${userScore} VS ${computerScore}`);
-    } else {
-        playerSelection = prompt("Pick a move");
-    }
-
-    console.log(playRound(playerSelection, computerSelection));
-    console.log(`user score = ${userScore}`);
-    console.log(`computer score = ${computerScore}`);
 }
 
-    
+
+
+
+function playRound(playerSelection, computerSelection) {
+    if (playerSelection.toLowerCase() === "rock") {
+        if (computerSelection === "paper") {
+            computerScore++;
+            return lose;
+        } else if (computerSelection === "rock") {
+            return tie;
+        } else {
+            userScore++;
+            return win;
+        }
+    }
+
+    if (playerSelection.toLowerCase() === "scissors") {
+        if (computerSelection === "paper") {
+            userScore++;
+            return win;
+        } else if (computerSelection === "rock") {
+            computerScore++;
+            return lose;
+        } else {
+            return tie;
+        }
+    }
+
+    if (playerSelection.toLowerCase() === "paper") {
+        if (computerSelection === "paper") {
+            return tie;
+        } else if (computerSelection === "rock") {
+            userScore++;
+            return win;
+        } else {
+            computerScore++;
+            return lose;
+        }
+    }
+}
+
+
+let userScore = parseInt(0);
+let computerScore = parseInt(0);
+let win = "You win"
+let lose = "You lose"
+let tie = "It is a tie"
+
+var i = 0;
+const play = () => {
+    let playerSelection = prompt("Pick a move");
+    const computerSelection = computerPlay()
+    console.log(playRound(playerSelection, computerSelection))
+    console.log("your score = " + userScore);
+    console.log("Computer's score = " + computerScore);
+    i++;
+    if (i !== 5) {
+        play();
+    } else {
+        alert("Game Over=> User("+userScore+") vs Computer("+computerScore+")");
+    }
+}
+
+play();
