@@ -1,8 +1,14 @@
 var options = ["rock", "paper", "scissors"];
 
 function computerPlay() {
-    const computerSelection = options[Math.floor(Math.random()*options.length)];
-    console.log(`Computer chose ${computerSelection}`);
+    let random = Math.random();
+    if (random <= 0.3333) {
+        return "paper";
+    } else if (random >= 0.6666) {
+        return "rock";
+    } else {
+        return "scissors";
+    }
 }
 
 
